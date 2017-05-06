@@ -83,6 +83,12 @@ void WidgetHelpers::setupForm( QWidget* formPointer, const QString& defaultTable
 			grp->setProperty( TABLE_NAME_PROP, button->property( TABLE_NAME_PROP ) );
 			connect( grp, SIGNAL( buttonClicked( QAbstractButton* ) ), SLOT( saveDataSlot() ) );
 		}
+#if( QT_VERSION < QT_VERSION_CHECK(5, 0, 0) ) // Just different NOTIFY attribute in different Qt versions. Not sure with version crireria exactly
+		else if( QComboBox* const box = qobject_cast< QComboBox* >( w ) )
+		{
+			connect( box, SIGNAL( currentIndexChanged( int ) ), SLOT( saveDataSlot() ) );
+		}
+#endif
 		else if( signal.enclosingMetaObject() != Q_NULLPTR )
 		{
 			connect( w, signal, this, saveDataSl );
