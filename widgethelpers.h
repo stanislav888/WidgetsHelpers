@@ -33,14 +33,9 @@ public:
 	QVariant getTableId(const QString &tableName) const;
 	QVariant getFieldValue(const QString &tableName, const QString &columnName) const;
 	void setAdditionalDisableWidgets( const QWidgetList &widgets );
-
-	static const int NO_SELECTION = -1;
 	static void setWidgetValue(const QVariant &value, QObject * const inputBox);
 	static QVariant getWidgetValue(const QObject* const sourceBox);
 	static bool execSqlQuery( QSqlQuery* query, const QString funcInfo );
-	static int addRowToModel( QSqlTableModel *model);
-	static bool deleteRowFromModels(QSqlTableModel *sourceModel, QSortFilterProxyModel *proxyModel, QTableView *tableView);
-	static int selectedRow( QTableView* tableView ); // Row at source model
 	static const char* TABLE_NAME_PROP;
 	static const char* COLUMN_NAME_PROP;
 
