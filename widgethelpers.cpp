@@ -104,12 +104,10 @@ void WidgetHelpers::setupForm( QWidget* formPointer, const QString& defaultTable
 
 void WidgetHelpers::fillForm(const QVariant& tableRecordId, const QString &tableName /*= QString::null */)
 {
-	const bool setFormEmpty = !tableRecordId.isValid();
+	const bool setFieldsEmpty = !tableRecordId.isValid();
 	const QString currentTable( tableName.isEmpty() ? m_defaultTableName : tableName );
 
-	if( setFormEmpty )
-		m_tablesRecords.clear();
-	else
+	if( !setFieldsEmpty )
 		addRecord( currentTable, tableRecordId );
 
 	foreach( QWidget* w, m_inputsList )
@@ -130,7 +128,7 @@ void WidgetHelpers::fillForm(const QVariant& tableRecordId, const QString &table
 				, widgetToolTip( w->toolTip() )
 				, originalToolTip( w->property( ORIGINAL_TOOLTIP_PROP ).toString() );
 
-			if( !setFormEmpty )
+			if( !setFieldsEmpty )
 			{
 				debugToolTip = "%1, c = %2, id = %3";
 				debugToolTip = debugToolTip.arg( DEBUG_TOOLTIP_PREFIX + tablePropStr ).arg( columnName ).arg( record.value( record.indexOf( "id" ) ).toString() );
@@ -151,7 +149,7 @@ void WidgetHelpers::fillForm(const QVariant& tableRecordId, const QString &table
 
 			QVariant value;
 
-			if( setFormEmpty )
+			if( setFieldsEmpty )
 				value = QVariant( QString::null );
 			else
 				value = record.value( record.indexOf( columnName ) );
@@ -166,12 +164,12 @@ void WidgetHelpers::fillForm(const QVariant& tableRecordId, const QString &table
 				{
 					foreach( QAbstractButton* b, grp->buttons() )
 					{
-						b->setDisabled( setFormEmpty );
+						b->setDisabled( setFieldsEmpty );
 					}
 				}
 			}
 
-			w->setDisabled( setFormEmpty );
+			w->setDisabled( setFieldsEmpty );
 
 		}
 	}
@@ -180,7 +178,7 @@ void WidgetHelpers::fillForm(const QVariant& tableRecordId, const QString &table
 	{
 		foreach( QWidget* w, m_additionalWidgetsToDisable )
 		{
-			w->setDisabled( setFormEmpty );
+			w->setDisabled( setFieldsEmpty );
 		}
 	}
 }
