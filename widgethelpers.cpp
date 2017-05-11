@@ -314,7 +314,8 @@ bool WidgetHelpers::execSqlQuery( QSqlQuery *query, const QString funcInfo )
 
 	if( !queryOk )
 	{
-		qDebug() << "-------"<< funcInfo << " SQL query completed with errors-------";
+		qDebug() << "------- SQL query completed with errors-------";
+		qDebug() << funcInfo;
 		qDebug() << query->lastQuery();
 		qDebug() << query->lastError();
 		qDebug() << "----------------------------------------------";
