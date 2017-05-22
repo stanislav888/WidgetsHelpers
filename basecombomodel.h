@@ -8,7 +8,8 @@ class BaseComboModel : public QSqlQueryModel
 	QVariant dataFromParent(QModelIndex index, int column) const;
 
 public:
-	explicit BaseComboModel( const QString &columns, QObject *parent = 0 );
+	explicit BaseComboModel( const QString &columns, const QString &queryTail, QObject *parent = 0 );
 	virtual QVariant data(const QModelIndex &item, int role = Qt::DisplayRole) const;
+	virtual int rowCount(const QModelIndex &parent) const;
 };
 
