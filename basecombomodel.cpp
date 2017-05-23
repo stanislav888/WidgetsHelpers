@@ -1,5 +1,6 @@
 #include "basecombomodel.h"
 #include <QSqlQuery>
+#include <QStringList>
 
 namespace
 {
