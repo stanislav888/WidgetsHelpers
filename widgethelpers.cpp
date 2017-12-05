@@ -228,7 +228,8 @@ void WidgetHelpers::setWidgetValue( const QVariant &value, QObject* const inputB
 
 		if( dateEdit && value.isNull() )
 		{
-			dateEdit->setDate( dateEdit->minimumDate() );
+			dateEdit->setSpecialValueText( " " );
+			dateEdit->setDate( QDate::fromString( "01/01/0001", "dd/MM/yyyy" ) );  // Little hack for set ampty value
 		}
 		else if( QComboBox *box = qobject_cast< QComboBox* >( inputBox ) )
 		{
