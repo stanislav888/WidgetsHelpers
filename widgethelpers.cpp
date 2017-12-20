@@ -18,6 +18,7 @@
 #include <QCheckBox>
 #include <QDateEdit>
 #include <QLabel>
+#include <QLineEdit>
 
 #ifndef Q_NULLPTR
 #define Q_NULLPTR NULL
@@ -89,6 +90,10 @@ void WidgetHelpers::setupForm( QWidget* formPointer, const QString& defaultTable
 			connect( box, SIGNAL( currentIndexChanged( int ) ), SLOT( saveDataSlot() ) );
 		}
 #endif
+		else if( QLineEdit* edit = qobject_cast< QLineEdit* >( w ) )
+		{
+			connect( edit, SIGNAL( editingFinished() ), this, SLOT( saveDataSlot() ) ); // notifySignal() made UI slow
+		}
 		else if( signal.enclosingMetaObject() != Q_NULLPTR )
 		{
 			connect( w, signal, this, saveDataSl );
